@@ -7,7 +7,7 @@ export default function App() {
   const [result, setResult] = useState(null)
 
   const analyze = async () => {
-    const res = await axios.post('http://127.0.0.1:5000/analyze', { email })
+    const res = await axios.post('https://phishing-email-backend-7a45.onrender.com/analyze', { email })
     setResult(res.data)
   }
 
