@@ -351,7 +351,7 @@ const Login = () => {
           <div className="pmn-brand">
             <div className="pmn-shield">🛡</div>
             <div className="pmn-brand-name">
-              PhishMe<em>Not</em> AI
+              PhishMeNot AI
             </div>
           </div>
           <div className="pmn-tagline">VERSION v1.5x</div>

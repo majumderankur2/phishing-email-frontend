@@ -497,7 +497,7 @@ const Settings = () => {
         <div className="st-header">
           <div className="st-brand">
             <div className="st-brand-shield">🛡</div>
-            PhishMe<em>Not</em> AI
+            PhishMeNot AI
           </div>
           <div className="st-header-right">
             <div className="st-status">

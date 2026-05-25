@@ -538,7 +538,7 @@ const Dashboard = () => {
         <div className="db-header">
           <div className="db-brand">
             <div className="db-brand-shield">🛡</div>
-            PhishMe<em>Not</em> AI
+            PhishMeNot AI
           </div>
           <div className="db-header-right">
             <div className="db-status">

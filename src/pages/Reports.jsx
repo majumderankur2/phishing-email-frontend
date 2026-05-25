@@ -575,7 +575,7 @@ const Reports = () => {
         <div className="rp-header">
           <div className="rp-brand">
             <div className="rp-brand-shield">🛡</div>
-            PhishMe<em>Not</em> AI
+            PhishMeNot AI
           </div>
           <div className="rp-header-right">
             <div className="rp-status">
