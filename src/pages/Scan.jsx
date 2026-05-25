@@ -61,7 +61,7 @@ const Scan = () => {
     setError(null);
   };
 
-  const isPhishing = result?.label === "phishing";
+  const isPhishing = result?.label === "phishing" || result?.label === "suspicious";
   const score = result?.score ?? 0;
 
   return (
@@ -605,7 +605,7 @@ const Scan = () => {
             <div className="loading-panel">
               <div className="loading-spinner" />
               <div className="loading-text">RUNNING ENGINES...</div>
-              <div className="loading-sub">GROQ · ML · RULES · URL SCANNER</div>
+              <div className="loading-sub">GROQ · GEMINI · ML · RULES · URL SCANNER</div>
             </div>
           )}
 
@@ -737,6 +737,9 @@ const Scan = () => {
 };
 
 export default Scan;
+
+
+
 
 
 
