@@ -580,7 +580,7 @@ const Reports = () => {
           <div className="rp-header-right">
             <div className="rp-status">
               <div className="status-dot" />
-              4 ENGINES ACTIVE
+              5 ENGINES ACTIVE
             </div>
             <button className="rp-signout" onClick={handleSignOut}>SIGN OUT</button>
           </div>
@@ -845,5 +845,6 @@ const Reports = () => {
 };
 
 export default Reports;
+
 
 

@@ -543,7 +543,7 @@ const Dashboard = () => {
           <div className="db-header-right">
             <div className="db-status">
               <div className="status-dot" />
-              4 ENGINES ACTIVE
+              5 ENGINES ACTIVE
             </div>
             <button className="db-signout" onClick={handleSignOut}>
               SIGN OUT
@@ -729,6 +729,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
 

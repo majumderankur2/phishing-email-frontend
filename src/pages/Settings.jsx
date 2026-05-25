@@ -19,7 +19,7 @@ const Settings = () => {
     rules:   true,
     url:     true,
     bert:    false, // permanently disabled
-    gemini:  false, // pending
+    gemini:  true,  // active
   });
 
   // Cache settings — display only
@@ -502,7 +502,7 @@ const Settings = () => {
           <div className="st-header-right">
             <div className="st-status">
               <div className="status-dot" />
-              4 ENGINES ACTIVE
+              5 ENGINES ACTIVE
             </div>
             <button className="st-signout" onClick={handleSignOut}>SIGN OUT</button>
           </div>
@@ -717,5 +717,7 @@ const Settings = () => {
 };
 
 export default Settings;
+
+
 
 
