@@ -58,10 +58,19 @@ const Settings = () => {
       canToggle: true,
     },
     {
+      key: "gemini",
+      name: "Gemini AI",
+      desc: "Google Gemini 1.5 Flash — parallel AI analysis (25%)",
+      weight: "25%",
+      status: "ACTIVE",
+      statusColor: "#2dc56a",
+      canToggle: true,
+    },
+    {
       key: "ml",
       name: "ML Model",
-      desc: "TF-IDF + LinearSVC trained on phishing corpus (20%)",
-      weight: "20%",
+      desc: "TF-IDF + LinearSVC trained on phishing corpus (18%)",
+      weight: "18%",
       status: "ACTIVE",
       statusColor: "#2dc56a",
       canToggle: true,
@@ -78,8 +87,8 @@ const Settings = () => {
     {
       key: "url",
       name: "URL Scanner",
-      desc: "Extracts and evaluates URLs for suspicious domains (8%)",
-      weight: "8%",
+      desc: "Extracts and evaluates URLs for suspicious domains (10%)",
+      weight: "10%",
       status: "ACTIVE",
       statusColor: "#2dc56a",
       canToggle: true,
@@ -88,18 +97,9 @@ const Settings = () => {
       key: "bert",
       name: "BERT",
       desc: "Transformer model — disabled (too heavy for 512MB free tier)",
-      weight: "25%",
+      weight: "0%",
       status: "DISABLED",
       statusColor: "#ff4d6d",
-      canToggle: false,
-    },
-    {
-      key: "gemini",
-      name: "Gemini AI",
-      desc: "Google Gemini engine — API key set, integration pending",
-      weight: "—",
-      status: "PENDING",
-      statusColor: "#f5a623",
       canToggle: false,
     },
   ];
@@ -675,24 +675,31 @@ const Settings = () => {
               </span>
             </div>
             <div className="sys-row">
-              <span className="sys-key">BERT ENGINE</span>
-              <span className="sys-val" style={{ color: "#ff4d6d" }}>
-                <span className="sys-dot" style={{ background: "#ff4d6d" }} />
-                DISABLED — 512MB limit exceeded
+              <span className="sys-key">GROQ ENGINE</span>
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                ACTIVE — LLaMA-3.3-70b (35%)
               </span>
             </div>
             <div className="sys-row">
               <span className="sys-key">GEMINI ENGINE</span>
-              <span className="sys-val" style={{ color: "#f5a623" }}>
-                <span className="sys-dot" style={{ background: "#f5a623" }} />
-                PENDING — API key configured
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                ACTIVE — Gemini 1.5 Flash (25%)
               </span>
             </div>
             <div className="sys-row">
               <span className="sys-key">ML MODEL</span>
               <span className="sys-val" style={{ color: "#2dc56a" }}>
                 <span className="sys-dot" style={{ background: "#2dc56a" }} />
-                sklearn 1.5.2 · TF-IDF + LinearSVC
+                sklearn 1.5.2 · TF-IDF + LinearSVC (18%)
+              </span>
+            </div>
+            <div className="sys-row">
+              <span className="sys-key">BERT ENGINE</span>
+              <span className="sys-val" style={{ color: "#ff4d6d" }}>
+                <span className="sys-dot" style={{ background: "#ff4d6d" }} />
+                DISABLED — 512MB limit exceeded
               </span>
             </div>
           </div>
@@ -717,7 +724,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-
-
-
