@@ -351,7 +351,7 @@ const Login = () => {
           <div className="pmn-brand">
             <div className="pmn-shield">🛡</div>
             <div className="pmn-brand-name">
-              PhishMeNot AI
+              PhishMe<em>Not</em> AI
             </div>
           </div>
           <div className="pmn-tagline">VERSION v1.5x</div>
@@ -422,3 +422,4 @@ const Login = () => {
 };
 
 export default Login;
+

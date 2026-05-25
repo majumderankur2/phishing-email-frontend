@@ -497,7 +497,7 @@ const Settings = () => {
         <div className="st-header">
           <div className="st-brand">
             <div className="st-brand-shield">🛡</div>
-            PhishMeNot AI
+            PhishMe<em>Not</em> AI
           </div>
           <div className="st-header-right">
             <div className="st-status">
@@ -700,7 +700,7 @@ const Settings = () => {
           {/* ── SIGN OUT ── */}
           <div className="signout-panel">
             <div className="signout-text">
-              <div className="signout-title">Sign out of PhishMeNot AI</div>
+              <div className="signout-title">Sign out of PhishMe<em>Not</em> AI</div>
               <div className="signout-sub">
                 You will be redirected to the login screen. Your scan history is saved.
               </div>
@@ -717,3 +717,4 @@ const Settings = () => {
 };
 
 export default Settings;
+

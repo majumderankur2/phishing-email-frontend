@@ -538,7 +538,7 @@ const Dashboard = () => {
         <div className="db-header">
           <div className="db-brand">
             <div className="db-brand-shield">🛡</div>
-            PhishMeNot AI
+            PhishMe<em>Not</em> AI
           </div>
           <div className="db-header-right">
             <div className="db-status">
@@ -729,3 +729,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

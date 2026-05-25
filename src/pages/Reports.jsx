@@ -575,7 +575,7 @@ const Reports = () => {
         <div className="rp-header">
           <div className="rp-brand">
             <div className="rp-brand-shield">🛡</div>
-            PhishMeNot AI
+            PhishMe<em>Not</em> AI
           </div>
           <div className="rp-header-right">
             <div className="rp-status">
@@ -845,3 +845,4 @@ const Reports = () => {
 };
 
 export default Reports;
+

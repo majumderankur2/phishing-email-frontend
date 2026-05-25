@@ -555,7 +555,7 @@ const Scan = () => {
         <div className="scan-header">
           <div className="scan-brand">
             <div className="scan-brand-shield">🛡</div>
-            PhishMeNot AI
+            PhishMe<em>Not</em> AI
           </div>
           <div className="scan-status">
             <div className="status-dot" />
@@ -737,3 +737,4 @@ const Scan = () => {
 };
 
 export default Scan;
+
