@@ -421,7 +421,7 @@ const History = () => {
         <div className="hist-header">
           <div className="hist-brand">
             <div className="hist-brand-shield">🛡</div>
-            PhishMe<em>Not</em> AI
+            <span>PhishMe<em>Not</em> AI</span>
           </div>
           <div className="hist-header-right">
             <div className="hist-status">
@@ -565,4 +565,5 @@ const History = () => {
 };
 
 export default History;
+
 
