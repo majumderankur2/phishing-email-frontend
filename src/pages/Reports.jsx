@@ -100,12 +100,13 @@ const Reports = () => {
 
   // ── engine confidence weights (static — from project spec) ────
   const engineList = [
-    { name: "GROQ AI",   weight: 35, pct: engines ? 93 : 0, color: "#00f5ff" },
-    { name: "ML MODEL",  weight: 20, pct: engines ? 87 : 0, color: "#00f5ff" },
-    { name: "RULES",     weight: 12, pct: engines ? 79 : 0, color: "#2dc56a" },
-    { name: "URL SCAN",  weight: 8,  pct: engines ? 82 : 0, color: "#2dc56a" },
-    { name: "BERT",      weight: 25, pct: 0,                 color: "#1a3a4a", disabled: true },
-  ];
+  { name: "GROQ AI",  weight: 30, pct: engines ? 93 : 0, color: "#00f5ff" },
+  { name: "GROQ2",    weight: 25, pct: engines ? 89 : 0, color: "#00f5ff" },
+  { name: "COHERE",   weight: 20, pct: engines ? 91 : 0, color: "#00f5ff" },
+  { name: "ML MODEL", weight: 15, pct: engines ? 87 : 0, color: "#2dc56a" },
+  { name: "RULES",    weight: 7,  pct: engines ? 79 : 0, color: "#2dc56a" },
+  { name: "URL SCAN", weight: 3,  pct: engines ? 82 : 0, color: "#2dc56a" },
+];
 
   return (
     <>
@@ -580,7 +581,7 @@ const Reports = () => {
           <div className="rp-header-right">
             <div className="rp-status">
               <div className="status-dot" />
-              5 ENGINES ACTIVE
+              6 ENGINES ACTIVE
             </div>
             <button className="rp-signout" onClick={handleSignOut}>SIGN OUT</button>
           </div>
