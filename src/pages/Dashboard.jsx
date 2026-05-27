@@ -543,7 +543,7 @@ const Dashboard = () => {
           <div className="db-header-right">
             <div className="db-status">
               <div className="status-dot" />
-              5 ENGINES ACTIVE
+              6 ENGINES ACTIVE
             </div>
             <button className="db-signout" onClick={handleSignOut}>
               SIGN OUT
@@ -669,13 +669,7 @@ const Dashboard = () => {
                   {engines ? "82%" : "—"}
                 </div>
               </div>
-              <div className="engine-row">
-                <div className="engine-name">BERT</div>
-                <div className="bar-track">
-                  <div className="bar-fill disabled" style={{ width: "0%" }} />
-                </div>
-                <div className="engine-pct" style={{ color: "#1a3a4a" }}>OFF</div>
-              </div>
+              
 
               <div className="panel-title" style={{ marginTop: "18px" }}>
                 WEEKLY ACTIVITY
@@ -729,6 +723,9 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
 
 
 

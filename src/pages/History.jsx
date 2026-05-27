@@ -426,7 +426,7 @@ const History = () => {
           <div className="hist-header-right">
             <div className="hist-status">
               <div className="status-dot" />
-              5 ENGINES ACTIVE
+              6 ENGINES ACTIVE
             </div>
             <button className="hist-signout" onClick={handleSignOut}>
               SIGN OUT
@@ -565,6 +565,7 @@ const History = () => {
 };
 
 export default History;
+
 
 
 

@@ -735,19 +735,22 @@ const Reports = () => {
                   <div className="panel-title" style={{ marginTop: "18px" }}>ENGINE WEIGHTS</div>
                   <div style={{ fontSize: "10px", fontFamily: "'Share Tech Mono', monospace", color: "#2a5a6a", lineHeight: 1.8 }}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span>GROQ AI</span><span style={{ color: "#3a7a9a" }}>35%</span>
+                      <span>GROQ AI</span><span style={{ color: "#3a7a9a" }}>30%</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span>BERT</span><span style={{ color: "#1e3a4a" }}>25% (disabled)</span>
+                      <span>GROQ2</span><span style={{ color: "#3a7a9a" }}>25%</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span>ML MODEL</span><span style={{ color: "#3a7a9a" }}>20%</span>
+                      <span>COHERE</span><span style={{ color: "#3a7a9a" }}>20%</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span>RULES</span><span style={{ color: "#3a7a9a" }}>12%</span>
+                      <span>ML MODEL</span><span style={{ color: "#3a7a9a" }}>15%</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span>URL SCANNER</span><span style={{ color: "#3a7a9a" }}>8%</span>
+                      <span>RULES</span><span style={{ color: "#3a7a9a" }}>7%</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span>URL SCANNER</span><span style={{ color: "#3a7a9a" }}>3%</span>
                     </div>
                   </div>
                 </div>

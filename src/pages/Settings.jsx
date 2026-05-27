@@ -14,12 +14,12 @@ const Settings = () => {
 
   // Engine toggles — display only (backend always runs all active engines)
   const [toggles, setToggles] = useState({
-    groq:    true,
-    ml:      true,
-    rules:   true,
-    url:     true,
-    bert:    false, // permanently disabled
-    gemini:  true,  // active
+    groq:   true,
+    groq2:  true,
+    cohere: true,
+    ml:     true,
+    rules:  true,
+    url:    true,
   });
 
   // Cache settings — display only
@@ -48,60 +48,12 @@ const Settings = () => {
   };
 
   const engineList = [
-    {
-      key: "groq",
-      name: "Groq AI",
-      desc: "LLaMA-3 via Groq API — fastest, highest weight (35%)",
-      weight: "35%",
-      status: "ACTIVE",
-      statusColor: "#2dc56a",
-      canToggle: true,
-    },
-    {
-      key: "gemini",
-      name: "Gemini AI",
-      desc: "Google Gemini 1.5 Flash — parallel AI analysis (25%)",
-      weight: "25%",
-      status: "ACTIVE",
-      statusColor: "#2dc56a",
-      canToggle: true,
-    },
-    {
-      key: "ml",
-      name: "ML Model",
-      desc: "TF-IDF + LinearSVC trained on phishing corpus (18%)",
-      weight: "18%",
-      status: "ACTIVE",
-      statusColor: "#2dc56a",
-      canToggle: true,
-    },
-    {
-      key: "rules",
-      name: "Rule Engine",
-      desc: "Pattern-based regex rules for known phishing signals (12%)",
-      weight: "12%",
-      status: "ACTIVE",
-      statusColor: "#2dc56a",
-      canToggle: true,
-    },
-    {
-      key: "url",
-      name: "URL Scanner",
-      desc: "Extracts and evaluates URLs for suspicious domains (10%)",
-      weight: "10%",
-      status: "ACTIVE",
-      statusColor: "#2dc56a",
-      canToggle: true,
-    },
-    {
-      key: "bert",
-      name: "BERT",
-      desc: "Transformer model — disabled (too heavy for 512MB free tier)",
-      weight: "0%",
-      status: "DISABLED",
-      statusColor: "#ff4d6d",
-      canToggle: false,
-    },
+    { key: "groq",   name: "Groq AI",      desc: "LLaMA-3.3-70b via Groq API � primary AI engine (30%)",        weight: "30%", status: "ACTIVE", canToggle: true },
+    { key: "groq2",  name: "Groq AI #2",   desc: "Mixtral-8x7b via Groq API � parallel AI engine (25%)",        weight: "25%", status: "ACTIVE", canToggle: true },
+    { key: "cohere", name: "Cohere AI",     desc: "Command-R-Plus via Cohere API � 3rd AI engine (20%)",         weight: "20%", status: "ACTIVE", canToggle: true },
+    { key: "ml",     name: "ML Model",      desc: "TF-IDF + LinearSVC trained on phishing corpus (15%)",         weight: "15%", status: "ACTIVE", canToggle: true },
+    { key: "rules",  name: "Rule Engine",   desc: "Pattern-based regex rules for known phishing signals (7%)",   weight: "7%",  status: "ACTIVE", canToggle: true },
+    { key: "url",    name: "URL Scanner",   desc: "Extracts and evaluates URLs for suspicious domains (3%)",     weight: "3%",  status: "ACTIVE", canToggle: true },
   ];
 
   return (
@@ -502,7 +454,7 @@ const Settings = () => {
           <div className="st-header-right">
             <div className="st-status">
               <div className="status-dot" />
-              5 ENGINES ACTIVE
+              6 ENGINES ACTIVE
             </div>
             <button className="st-signout" onClick={handleSignOut}>SIGN OUT</button>
           </div>
@@ -681,28 +633,7 @@ const Settings = () => {
                 ACTIVE — LLaMA-3.3-70b (35%)
               </span>
             </div>
-            <div className="sys-row">
-              <span className="sys-key">GEMINI ENGINE</span>
-              <span className="sys-val" style={{ color: "#2dc56a" }}>
-                <span className="sys-dot" style={{ background: "#2dc56a" }} />
-                ACTIVE — Gemini 1.5 Flash (25%)
-              </span>
-            </div>
-            <div className="sys-row">
-              <span className="sys-key">ML MODEL</span>
-              <span className="sys-val" style={{ color: "#2dc56a" }}>
-                <span className="sys-dot" style={{ background: "#2dc56a" }} />
-                sklearn 1.5.2 · TF-IDF + LinearSVC (18%)
-              </span>
-            </div>
-            <div className="sys-row">
-              <span className="sys-key">BERT ENGINE</span>
-              <span className="sys-val" style={{ color: "#ff4d6d" }}>
-                <span className="sys-dot" style={{ background: "#ff4d6d" }} />
-                DISABLED — 512MB limit exceeded
-              </span>
-            </div>
-          </div>
+            
 
           {/* ── SIGN OUT ── */}
           <div className="signout-panel">
@@ -724,3 +655,6 @@ const Settings = () => {
 };
 
 export default Settings;
+
+
+
