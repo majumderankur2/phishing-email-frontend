@@ -1,21 +1,29 @@
-import { auth } from '../firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-
 const GMAIL_API_BASE = 'https://www.googleapis.com/gmail/v1';
+const CLIENT_ID = '322981810425-9be448qvt1qple2gemghj5u4m8ni9ufc.apps.googleusercontent.com';
+const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 
-// Get a fresh Gmail access token using signInWithPopup
+// Get Gmail access token using Google Identity Services
 export async function getGmailAccessToken() {
-  const provider = new GoogleAuthProvider();
-  provider.addScope('https://www.googleapis.com/auth/gmail.readonly');
-  provider.setCustomParameters({ 
-    access_type: 'offline', 
-    prompt: 'consent',
-    login_hint: auth.currentUser?.email || ''
-  });
+  return new Promise((resolve, reject) => {
+    if (!window.google) {
+      reject(new Error('Google Identity Services not loaded'));
+      return;
+    }
 
-  const result = await signInWithPopup(auth, provider);
-  const credential = GoogleAuthProvider.credentialFromResult(result);
-  return credential.accessToken;
+    const client = window.google.accounts.oauth2.initTokenClient({
+      client_id: CLIENT_ID,
+      scope: SCOPES,
+      callback: (response) => {
+        if (response.error) {
+          reject(new Error(response.error));
+        } else {
+          resolve(response.access_token);
+        }
+      },
+    });
+
+    client.requestAccessToken({ prompt: 'consent' });
+  });
 }
 
 // Fetch list of recent unread emails
@@ -41,15 +49,13 @@ export async function fetchEmailContent(accessToken, messageId) {
 // Extract plain text body from Gmail message
 export function extractEmailBody(message) {
   const parts = message.payload?.parts || [];
-  
-  // Try to find plain text part
+
   for (const part of parts) {
     if (part.mimeType === 'text/plain' && part.body?.data) {
       return atob(part.body.data.replace(/-/g, '+').replace(/_/g, '/'));
     }
   }
-  
-  // Try nested parts (some emails have parts within parts)
+
   for (const part of parts) {
     if (part.parts) {
       for (const subpart of part.parts) {
@@ -60,7 +66,6 @@ export function extractEmailBody(message) {
     }
   }
 
-  // Fallback: try top-level body
   if (message.payload?.body?.data) {
     return atob(message.payload.body.data.replace(/-/g, '+').replace(/_/g, '/'));
   }
