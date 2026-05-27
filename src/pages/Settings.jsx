@@ -12,7 +12,6 @@ const Settings = () => {
   const [engines, setEngines] = useState(null);
   const [loadingEngines, setLoadingEngines] = useState(true);
 
-  // Engine toggles — display only (backend always runs all active engines)
   const [toggles, setToggles] = useState({
     groq:   true,
     groq2:  true,
@@ -22,7 +21,6 @@ const Settings = () => {
     url:    true,
   });
 
-  // Cache settings — display only
   const [cacheEnabled, setCacheEnabled] = useState(true);
   const [ttlHours, setTtlHours]         = useState(24);
 
@@ -48,12 +46,54 @@ const Settings = () => {
   };
 
   const engineList = [
-    { key: "groq",   name: "Groq AI",      desc: "LLaMA-3.3-70b via Groq API � primary AI engine (30%)",        weight: "30%", status: "ACTIVE", canToggle: true },
-    { key: "groq2",  name: "Groq AI #2",   desc: "Mixtral-8x7b via Groq API � parallel AI engine (25%)",        weight: "25%", status: "ACTIVE", canToggle: true },
-    { key: "cohere", name: "Cohere AI",     desc: "Command-R-Plus via Cohere API � 3rd AI engine (20%)",         weight: "20%", status: "ACTIVE", canToggle: true },
-    { key: "ml",     name: "ML Model",      desc: "TF-IDF + LinearSVC trained on phishing corpus (15%)",         weight: "15%", status: "ACTIVE", canToggle: true },
-    { key: "rules",  name: "Rule Engine",   desc: "Pattern-based regex rules for known phishing signals (7%)",   weight: "7%",  status: "ACTIVE", canToggle: true },
-    { key: "url",    name: "URL Scanner",   desc: "Extracts and evaluates URLs for suspicious domains (3%)",     weight: "3%",  status: "ACTIVE", canToggle: true },
+    {
+      key: "groq",
+      name: "Groq AI",
+      desc: "LLaMA-3.3-70b via Groq API — primary AI engine (30%)",
+      weight: "30%",
+      status: "ACTIVE",
+      canToggle: true,
+    },
+    {
+      key: "groq2",
+      name: "Groq AI #2",
+      desc: "Mixtral-8x7b via Groq API — parallel AI engine (25%)",
+      weight: "25%",
+      status: "ACTIVE",
+      canToggle: true,
+    },
+    {
+      key: "cohere",
+      name: "Cohere AI",
+      desc: "Command-R-Plus via Cohere API — 3rd AI engine (20%)",
+      weight: "20%",
+      status: "ACTIVE",
+      canToggle: true,
+    },
+    {
+      key: "ml",
+      name: "ML Model",
+      desc: "TF-IDF + LinearSVC trained on phishing corpus (15%)",
+      weight: "15%",
+      status: "ACTIVE",
+      canToggle: true,
+    },
+    {
+      key: "rules",
+      name: "Rule Engine",
+      desc: "Pattern-based regex rules for known phishing signals (7%)",
+      weight: "7%",
+      status: "ACTIVE",
+      canToggle: true,
+    },
+    {
+      key: "url",
+      name: "URL Scanner",
+      desc: "Extracts and evaluates URLs for suspicious domains (3%)",
+      weight: "3%",
+      status: "ACTIVE",
+      canToggle: true,
+    },
   ];
 
   return (
@@ -68,7 +108,6 @@ const Settings = () => {
           color: #e0f0ff;
         }
 
-        /* ── HEADER ── */
         .st-header {
           display: flex;
           align-items: center;
@@ -135,7 +174,6 @@ const Settings = () => {
           border-color: rgba(255,77,109,0.6);
         }
 
-        /* ── NAV ── */
         .st-nav {
           display: flex;
           padding: 0 24px;
@@ -156,7 +194,6 @@ const Settings = () => {
         .nav-item.active { color: #00f5ff; border-bottom-color: #00f5ff; }
         .nav-item:hover:not(.active) { color: #5a9ab5; }
 
-        /* ── BODY ── */
         .st-body {
           max-width: 900px;
           margin: 0 auto;
@@ -170,7 +207,6 @@ const Settings = () => {
           margin-bottom: 20px;
         }
 
-        /* ── PANELS ── */
         .panel {
           background: #0a1520;
           border: 1px solid rgba(0,245,255,0.1);
@@ -196,7 +232,6 @@ const Settings = () => {
           border-bottom: 1px solid rgba(0,245,255,0.08);
         }
 
-        /* ── ACCOUNT INFO ── */
         .account-row {
           display: flex;
           align-items: center;
@@ -217,7 +252,6 @@ const Settings = () => {
           color: #7abbd0;
         }
 
-        /* ── ENGINE TOGGLE ROWS ── */
         .engine-toggle-row {
           display: flex;
           align-items: center;
@@ -265,24 +299,12 @@ const Settings = () => {
           color: #2dc56a;
           border: 1px solid rgba(45,197,106,0.25);
         }
-        .engine-status-badge.disabled {
-          background: rgba(255,77,109,0.08);
-          color: #ff4d6d;
-          border: 1px solid rgba(255,77,109,0.2);
-        }
-        .engine-status-badge.pending {
-          background: rgba(245,166,35,0.08);
-          color: #f5a623;
-          border: 1px solid rgba(245,166,35,0.2);
-        }
 
-        /* ── TOGGLE SWITCH ── */
         .toggle-wrap {
           flex-shrink: 0;
           display: flex;
           align-items: center;
         }
-        .toggle-input { display: none; }
         .toggle-track {
           width: 36px;
           height: 20px;
@@ -296,10 +318,6 @@ const Settings = () => {
         .toggle-track.on {
           background: rgba(0,245,255,0.15);
           border-color: rgba(0,245,255,0.4);
-        }
-        .toggle-track.disabled-track {
-          opacity: 0.35;
-          cursor: not-allowed;
         }
         .toggle-thumb {
           width: 14px;
@@ -316,7 +334,6 @@ const Settings = () => {
           transform: translateX(16px);
         }
 
-        /* ── CACHE SETTINGS ── */
         .cache-row {
           display: flex;
           align-items: center;
@@ -349,7 +366,6 @@ const Settings = () => {
           outline: none;
         }
 
-        /* ── SYSTEM STATUS ── */
         .sys-row {
           display: flex;
           align-items: center;
@@ -375,7 +391,6 @@ const Settings = () => {
           margin-right: 6px;
         }
 
-        /* ── SIGN OUT SECTION ── */
         .signout-panel {
           background: #0a1520;
           border: 1px solid rgba(255,77,109,0.12);
@@ -394,7 +409,6 @@ const Settings = () => {
           top: 0; left: 0; right: 0; height: 1px;
           background: linear-gradient(90deg, transparent, rgba(255,77,109,0.3), transparent);
         }
-        .signout-text {}
         .signout-title {
           font-size: 14px;
           font-weight: 600;
@@ -426,7 +440,6 @@ const Settings = () => {
           border-color: rgba(255,77,109,0.6);
         }
 
-        /* ── LOADING ── */
         .mini-spinner {
           width: 12px; height: 12px;
           border: 2px solid rgba(0,245,255,0.15);
@@ -445,7 +458,6 @@ const Settings = () => {
 
       <div className="st-root">
 
-        {/* ── HEADER ── */}
         <div className="st-header">
           <div className="st-brand">
             <div className="st-brand-shield">🛡</div>
@@ -460,7 +472,6 @@ const Settings = () => {
           </div>
         </div>
 
-        {/* ── NAV ── */}
         <div className="st-nav">
           <a href="/dashboard" className="nav-item">DASHBOARD</a>
           <a href="/scan"      className="nav-item">SCAN</a>
@@ -469,11 +480,9 @@ const Settings = () => {
           <span className="nav-item active">SETTINGS</span>
         </div>
 
-        {/* ── BODY ── */}
         <div className="st-body">
           <div className="st-page-title">// SYSTEM CONFIGURATION &amp; ACCOUNT</div>
 
-          {/* ── ACCOUNT INFO ── */}
           <div className="panel">
             <div className="panel-title">ACCOUNT INFO</div>
             <div className="account-row">
@@ -512,7 +521,6 @@ const Settings = () => {
             </div>
           </div>
 
-          {/* ── ENGINE TOGGLES ── */}
           <div className="panel">
             <div className="panel-title">ENGINE CONFIGURATION</div>
             {engineList.map((e) => (
@@ -522,17 +530,11 @@ const Settings = () => {
                   <div className="engine-desc">{e.desc}</div>
                 </div>
                 <span className="engine-weight-badge">{e.weight}</span>
-                <span className={`engine-status-badge ${
-                  e.status === "ACTIVE"   ? "active"   :
-                  e.status === "DISABLED" ? "disabled" : "pending"
-                }`}>{e.status}</span>
+                <span className="engine-status-badge active">ACTIVE</span>
                 <div className="toggle-wrap">
                   <div
-                    className={`toggle-track ${toggles[e.key] ? "on" : ""} ${!e.canToggle ? "disabled-track" : ""}`}
-                    onClick={() => {
-                      if (!e.canToggle) return;
-                      setToggles((prev) => ({ ...prev, [e.key]: !prev[e.key] }));
-                    }}
+                    className={`toggle-track ${toggles[e.key] ? "on" : ""}`}
+                    onClick={() => setToggles((prev) => ({ ...prev, [e.key]: !prev[e.key] }))}
                   >
                     <div className="toggle-thumb" />
                   </div>
@@ -541,7 +543,6 @@ const Settings = () => {
             ))}
           </div>
 
-          {/* ── CACHE SETTINGS ── */}
           <div className="panel">
             <div className="panel-title">CACHE SETTINGS</div>
             <div className="cache-row">
@@ -584,7 +585,6 @@ const Settings = () => {
             </div>
           </div>
 
-          {/* ── SYSTEM STATUS ── */}
           <div className="panel">
             <div className="panel-title">SYSTEM STATUS</div>
             <div className="sys-row">
@@ -630,15 +630,49 @@ const Settings = () => {
               <span className="sys-key">GROQ ENGINE</span>
               <span className="sys-val" style={{ color: "#2dc56a" }}>
                 <span className="sys-dot" style={{ background: "#2dc56a" }} />
-                ACTIVE — LLaMA-3.3-70b (35%)
+                ACTIVE — LLaMA-3.3-70b (30%)
               </span>
             </div>
-            
+            <div className="sys-row">
+              <span className="sys-key">GROQ2 ENGINE</span>
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                ACTIVE — Mixtral-8x7b (25%)
+              </span>
+            </div>
+            <div className="sys-row">
+              <span className="sys-key">COHERE ENGINE</span>
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                ACTIVE — Command-R-Plus (20%)
+              </span>
+            </div>
+            <div className="sys-row">
+              <span className="sys-key">ML MODEL</span>
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                sklearn 1.5.2 · TF-IDF + LinearSVC (15%)
+              </span>
+            </div>
+            <div className="sys-row">
+              <span className="sys-key">RULE ENGINE</span>
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                ACTIVE — Pattern matching (7%)
+              </span>
+            </div>
+            <div className="sys-row">
+              <span className="sys-key">URL SCANNER</span>
+              <span className="sys-val" style={{ color: "#2dc56a" }}>
+                <span className="sys-dot" style={{ background: "#2dc56a" }} />
+                ACTIVE — Domain analysis (3%)
+              </span>
+            </div>
+          </div>
 
-          {/* ── SIGN OUT ── */}
           <div className="signout-panel">
-            <div className="signout-text">
-              <div className="signout-title">Sign out of <span>PhishMe<em>Not</em> AI</span></div>
+            <div>
+              <div className="signout-title">Sign out of PhishMeNot AI</div>
               <div className="signout-sub">
                 You will be redirected to the login screen. Your scan history is saved.
               </div>
@@ -655,6 +689,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-
-
