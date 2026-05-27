@@ -559,7 +559,7 @@ const Scan = () => {
           </div>
           <div className="scan-status">
             <div className="status-dot" />
-            5 ENGINES ACTIVE
+            6 ENGINES ACTIVE
           </div>
         </div>
 
@@ -737,6 +737,8 @@ const Scan = () => {
 };
 
 export default Scan;
+
+
 
 
 
