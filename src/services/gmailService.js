@@ -1,15 +1,19 @@
 import { auth } from '../firebase';
-import { GoogleAuthProvider, reauthenticateWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const GMAIL_API_BASE = 'https://www.googleapis.com/gmail/v1';
 
-// Get a fresh Gmail access token
+// Get a fresh Gmail access token using signInWithPopup
 export async function getGmailAccessToken() {
   const provider = new GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/gmail.readonly');
-  provider.setCustomParameters({ access_type: 'offline', prompt: 'consent' });
+  provider.setCustomParameters({ 
+    access_type: 'offline', 
+    prompt: 'consent',
+    login_hint: auth.currentUser?.email || ''
+  });
 
-  const result = await reauthenticateWithPopup(auth.currentUser, provider);
+  const result = await signInWithPopup(auth, provider);
   const credential = GoogleAuthProvider.credentialFromResult(result);
   return credential.accessToken;
 }
@@ -21,6 +25,7 @@ export async function fetchUnreadEmails(accessToken, maxResults = 10) {
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   const data = await res.json();
+  console.log('Gmail messages response:', data);
   return data.messages || [];
 }
 
@@ -44,6 +49,17 @@ export function extractEmailBody(message) {
     }
   }
   
+  // Try nested parts (some emails have parts within parts)
+  for (const part of parts) {
+    if (part.parts) {
+      for (const subpart of part.parts) {
+        if (subpart.mimeType === 'text/plain' && subpart.body?.data) {
+          return atob(subpart.body.data.replace(/-/g, '+').replace(/_/g, '/'));
+        }
+      }
+    }
+  }
+
   // Fallback: try top-level body
   if (message.payload?.body?.data) {
     return atob(message.payload.body.data.replace(/-/g, '+').replace(/_/g, '/'));
