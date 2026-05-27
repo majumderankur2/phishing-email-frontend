@@ -605,7 +605,7 @@ const Scan = () => {
             <div className="loading-panel">
               <div className="loading-spinner" />
               <div className="loading-text">RUNNING ENGINES...</div>
-              <div className="loading-sub">GROQ · GEMINI · ML · RULES · URL SCANNER</div>
+              <div className="loading-sub">GROQ · GROQ2 · COHERE · ML · RULES · URL</div>
             </div>
           )}
 
