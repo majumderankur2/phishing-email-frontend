@@ -54,12 +54,15 @@ export default function GmailScan() {
         });
         const scanData = await scanRes.json();
 
+        const verdict = scanData.verdict || scanData.label || "unknown";
+        const score = scanData.score ?? 0;
+
         const result = {
           subject,
           from,
           date,
-          verdict: scanData.verdict,
-          score: scanData.score,
+          verdict,
+          score,
           skipped: false,
         };
 
@@ -71,8 +74,8 @@ export default function GmailScan() {
           subject,
           from,
           date,
-          verdict: scanData.verdict,
-          score: scanData.score,
+          verdict,
+          score,
           source: "gmail",
           timestamp: serverTimestamp(),
         });
