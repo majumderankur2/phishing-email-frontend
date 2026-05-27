@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 
-import Login    from "../pages/Login";
+import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
-import Scan     from "../pages/Scan";
+import Scan from "../pages/Scan";
 import History from "../pages/History";
 import Reports from "../pages/Reports";
 import Settings from "../pages/Settings";
-
+import GmailScan from "../pages/GmailScan";
 
 // Placeholder pages until you build them
 const ComingSoon = ({ page }) => (
@@ -31,7 +31,7 @@ const ComingSoon = ({ page }) => (
 // Protects routes — redirects to / if not logged in
 const ProtectedRoute = ({ children }) => {
   const [checking, setChecking] = useState(true);
-  const [authed,   setAuthed]   = useState(false);
+  const [authed, setAuthed] = useState(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -41,15 +41,15 @@ const ProtectedRoute = ({ children }) => {
     return unsub;
   }, []);
 
-  if (checking) return null; // or a loading spinner
+  if (checking) return null;
   return authed ? children : <Navigate to="/" replace />;
 };
 
 const AppRoutes = () => (
   <Routes>
     {/* Public */}
-    <Route path="/"       element={<Login />} />
-    <Route path="/login"  element={<Login />} />
+    <Route path="/" element={<Login />} />
+    <Route path="/login" element={<Login />} />
 
     {/* Protected */}
     <Route path="/dashboard" element={
@@ -62,11 +62,14 @@ const AppRoutes = () => (
       <ProtectedRoute><History /></ProtectedRoute>
     } />
     <Route path="/reports" element={
-  <ProtectedRoute><Reports /></ProtectedRoute>
-} />
+      <ProtectedRoute><Reports /></ProtectedRoute>
+    } />
     <Route path="/settings" element={
-  <ProtectedRoute><Settings /></ProtectedRoute>
-} />
+      <ProtectedRoute><Settings /></ProtectedRoute>
+    } />
+    <Route path="/gmail-scan" element={
+      <ProtectedRoute><GmailScan /></ProtectedRoute>
+    } />
 
     {/* Fallback */}
     <Route path="*" element={<Navigate to="/" replace />} />

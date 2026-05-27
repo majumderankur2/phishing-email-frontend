@@ -53,7 +53,7 @@ const Dashboard = () => {
       const data = await res.json();
       setEngines(data);
     } catch {
-      // silently fail — backend may be cold starting
+      // silently fail
     }
   };
 
@@ -70,7 +70,6 @@ const Dashboard = () => {
     ? Math.round((stats.threats / stats.total) * 100)
     : 0;
 
-  // Build weekly bar data from recentScans
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const weekCounts = Array(7).fill(0);
   const weekThreats = Array(7).fill(0);
@@ -95,7 +94,6 @@ const Dashboard = () => {
           color: #e0f0ff;
         }
 
-        /* ── HEADER ── */
         .db-header {
           display: flex;
           align-items: center;
@@ -162,7 +160,6 @@ const Dashboard = () => {
           border-color: rgba(255,77,109,0.6);
         }
 
-        /* ── NAV ── */
         .db-nav {
           display: flex;
           padding: 0 24px;
@@ -183,7 +180,6 @@ const Dashboard = () => {
         .nav-item.active { color: #00f5ff; border-bottom-color: #00f5ff; }
         .nav-item:hover:not(.active) { color: #5a9ab5; }
 
-        /* ── BODY ── */
         .db-body {
           max-width: 1100px;
           margin: 0 auto;
@@ -197,7 +193,6 @@ const Dashboard = () => {
           margin-bottom: 20px;
         }
 
-        /* ── METRIC CARDS ── */
         .metric-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -244,7 +239,6 @@ const Dashboard = () => {
           margin-top: 5px;
         }
 
-        /* ── TWO COL GRID ── */
         .two-col {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -252,7 +246,6 @@ const Dashboard = () => {
           margin-bottom: 14px;
         }
 
-        /* ── PANELS ── */
         .panel {
           background: #0a1520;
           border: 1px solid rgba(0,245,255,0.1);
@@ -278,7 +271,6 @@ const Dashboard = () => {
           border-bottom: 1px solid rgba(0,245,255,0.08);
         }
 
-        /* ── SCAN ROWS ── */
         .scan-row {
           display: flex;
           align-items: center;
@@ -334,7 +326,6 @@ const Dashboard = () => {
           flex-shrink: 0;
         }
 
-        /* ── ENGINE BARS ── */
         .engine-row {
           display: flex;
           align-items: center;
@@ -346,7 +337,7 @@ const Dashboard = () => {
           font-family: 'Share Tech Mono', monospace;
           font-size: 9px;
           color: #3a6a80;
-          width: 50px;
+          width: 56px;
           flex-shrink: 0;
         }
         .bar-track {
@@ -363,7 +354,6 @@ const Dashboard = () => {
           transition: width 0.8s ease;
         }
         .bar-fill.green { background: linear-gradient(90deg, #0a6a30, #2dc56a); }
-        .bar-fill.disabled { background: #1a2a3a; }
         .engine-pct {
           font-family: 'Share Tech Mono', monospace;
           font-size: 9px;
@@ -373,7 +363,6 @@ const Dashboard = () => {
           flex-shrink: 0;
         }
 
-        /* ── WEEKLY CHART ── */
         .chart-area {
           display: flex;
           align-items: flex-end;
@@ -404,7 +393,6 @@ const Dashboard = () => {
           color: #2a4a5a;
         }
 
-        /* ── QUICK SCAN CTA ── */
         .cta-panel {
           background: #0a1520;
           border: 1px solid rgba(0,245,255,0.15);
@@ -424,7 +412,6 @@ const Dashboard = () => {
           height: 1px;
           background: linear-gradient(90deg, transparent, rgba(0,245,255,0.5), transparent);
         }
-        .cta-text { }
         .cta-title {
           font-size: 16px;
           font-weight: 700;
@@ -457,16 +444,7 @@ const Dashboard = () => {
           flex-shrink: 0;
         }
         .cta-btn:hover { transform: translateY(-1px); }
-        .cta-btn::after {
-          content: '';
-          position: absolute; inset: 0;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-          transform: translateX(-100%);
-          animation: db-shimmer 2.5s infinite;
-        }
-        @keyframes db-shimmer { to { transform: translateX(100%); } }
 
-        /* ── EMPTY STATE ── */
         .empty-state {
           font-family: 'Share Tech Mono', monospace;
           font-size: 10px;
@@ -476,7 +454,6 @@ const Dashboard = () => {
           letter-spacing: 1px;
         }
 
-        /* ── LOADING ── */
         .loading-row {
           display: flex;
           align-items: center;
@@ -496,7 +473,6 @@ const Dashboard = () => {
         }
         @keyframes db-spin { to { transform: rotate(360deg); } }
 
-        /* ── THREAT RATE BAR ── */
         .threat-rate-wrap { margin-top: 10px; }
         .threat-rate-label {
           display: flex;
@@ -534,7 +510,6 @@ const Dashboard = () => {
 
       <div className="db-root">
 
-        {/* ── HEADER ── */}
         <div className="db-header">
           <div className="db-brand">
             <div className="db-brand-shield">🛡</div>
@@ -551,29 +526,29 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* ── NAV ── */}
         <div className="db-nav">
           <span className="nav-item active">DASHBOARD</span>
           <a href="/scan"     className="nav-item">SCAN</a>
           <a href="/history"  className="nav-item">HISTORY</a>
           <a href="/reports"  className="nav-item">REPORTS</a>
           <a href="/settings" className="nav-item">SETTINGS</a>
+          <a href="/gmail-scan" className="nav-item">GMAIL SCAN</a>
         </div>
 
-        {/* ── BODY ── */}
         <div className="db-body">
           <div className="db-page-title">// THREAT INTELLIGENCE OVERVIEW</div>
 
-          {/* ── QUICK SCAN CTA ── */}
           <div className="cta-panel">
-            <div className="cta-text">
+            <div>
               <div className="cta-title">Ready to scan a suspicious email?</div>
-              <div className="cta-sub">GROQ · ML · RULES · URL SCANNER — 4 ENGINES STANDING BY</div>
+              <div className="cta-sub">GROQ · GROQ2 · COHERE · ML · RULES · URL — 6 ENGINES STANDING BY</div>
             </div>
-            <a href="/scan" className="cta-btn">⚡ RUN SCAN</a>
+            <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
+              <a href="/scan" className="cta-btn">⚡ RUN SCAN</a>
+              <a href="/gmail-scan" className="cta-btn" style={{ background: "linear-gradient(135deg, #1a472a, #2dc56a)" }}>📧 SCAN GMAIL</a>
+            </div>
           </div>
 
-          {/* ── METRIC CARDS ── */}
           <div className="metric-grid">
             <div className="metric-card">
               <div className="metric-label">Total Scans</div>
@@ -597,10 +572,8 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* ── TWO COL: RECENT SCANS + ENGINE STATUS ── */}
           <div className="two-col">
 
-            {/* Recent Scans */}
             <div className="panel">
               <div className="panel-title">RECENT SCANS</div>
               {loadingData ? (
@@ -620,8 +593,7 @@ const Dashboard = () => {
                       </span>
                       <span className="scan-email">{scan.email_preview || "—"}</span>
                       {scan.cache_hit && <span className="cached-badge">⚡</span>}
-                      <span className="scan-score"
-                        style={{ color: isPhish ? "#ff4d6d" : "#2dc56a" }}>
+                      <span className="scan-score" style={{ color: isPhish ? "#ff4d6d" : "#2dc56a" }}>
                         {Math.round(scan.score ?? 0)}%
                       </span>
                     </div>
@@ -630,46 +602,27 @@ const Dashboard = () => {
               )}
             </div>
 
-            {/* Engine Status + Weekly Chart */}
             <div className="panel">
               <div className="panel-title">ENGINE STATUS</div>
-              <div className="engine-row">
-                <div className="engine-name">GROQ AI</div>
-                <div className="bar-track">
-                  <div className="bar-fill" style={{ width: engines ? "93%" : "0%" }} />
+              {[
+                { name: "GROQ AI",  pct: "93%", green: false },
+                { name: "GROQ2",    pct: "89%", green: false },
+                { name: "COHERE",   pct: "91%", green: false },
+                { name: "ML MODEL", pct: "87%", green: true  },
+                { name: "RULES",    pct: "79%", green: true  },
+                { name: "URL SCAN", pct: "82%", green: true  },
+              ].map((e) => (
+                <div className="engine-row" key={e.name}>
+                  <div className="engine-name">{e.name}</div>
+                  <div className="bar-track">
+                    <div className={`bar-fill ${e.green ? "green" : ""}`}
+                      style={{ width: engines ? e.pct : "0%" }} />
+                  </div>
+                  <div className="engine-pct" style={{ color: e.green ? "#2dc56a" : "#00f5ff" }}>
+                    {engines ? e.pct : "—"}
+                  </div>
                 </div>
-                <div className="engine-pct" style={{ color: "#00f5ff" }}>
-                  {engines ? "93%" : "—"}
-                </div>
-              </div>
-              <div className="engine-row">
-                <div className="engine-name">ML MODEL</div>
-                <div className="bar-track">
-                  <div className="bar-fill" style={{ width: engines ? "87%" : "0%" }} />
-                </div>
-                <div className="engine-pct" style={{ color: "#00f5ff" }}>
-                  {engines ? "87%" : "—"}
-                </div>
-              </div>
-              <div className="engine-row">
-                <div className="engine-name">RULES</div>
-                <div className="bar-track">
-                  <div className="bar-fill green" style={{ width: engines ? "79%" : "0%" }} />
-                </div>
-                <div className="engine-pct" style={{ color: "#2dc56a" }}>
-                  {engines ? "79%" : "—"}
-                </div>
-              </div>
-              <div className="engine-row">
-                <div className="engine-name">URL SCAN</div>
-                <div className="bar-track">
-                  <div className="bar-fill green" style={{ width: engines ? "82%" : "0%" }} />
-                </div>
-                <div className="engine-pct" style={{ color: "#2dc56a" }}>
-                  {engines ? "82%" : "—"}
-                </div>
-              </div>
-              
+              ))}
 
               <div className="panel-title" style={{ marginTop: "18px" }}>
                 WEEKLY ACTIVITY
@@ -677,14 +630,10 @@ const Dashboard = () => {
               <div className="chart-area">
                 {weekDays.map((day, i) => (
                   <div className="chart-bar-col" key={day}>
-                    <div
-                      className="chart-bar threats"
-                      style={{ height: `${maxWeek > 0 ? (weekThreats[i] / maxWeek) * 70 : 0}px` }}
-                    />
-                    <div
-                      className="chart-bar total"
-                      style={{ height: `${maxWeek > 0 ? (weekCounts[i] / maxWeek) * 70 : 4}px` }}
-                    />
+                    <div className="chart-bar threats"
+                      style={{ height: `${maxWeek > 0 ? (weekThreats[i] / maxWeek) * 70 : 0}px` }} />
+                    <div className="chart-bar total"
+                      style={{ height: `${maxWeek > 0 ? (weekCounts[i] / maxWeek) * 70 : 4}px` }} />
                     <div className="chart-day">{day}</div>
                   </div>
                 ))}
@@ -692,7 +641,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* ── THREAT RATE BARS ── */}
           <div className="panel">
             <div className="panel-title">DETECTION BREAKDOWN</div>
             <div className="threat-rate-wrap">
@@ -723,10 +671,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-
-
-
-
-
