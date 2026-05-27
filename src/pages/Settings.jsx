@@ -48,9 +48,9 @@ const Settings = () => {
   };
 
   const engineList = [
-    { key: "groq",   name: "Groq AI",      desc: "LLaMA-3.3-70b via Groq API — primary AI engine (30%)",        weight: "30%", status: "ACTIVE", canToggle: true },
-    { key: "groq2",  name: "Groq AI #2",   desc: "Mixtral-8x7b via Groq API — parallel AI engine (25%)",        weight: "25%", status: "ACTIVE", canToggle: true },
-    { key: "cohere", name: "Cohere AI",     desc: "Command-R-Plus via Cohere API — 3rd AI engine (20%)",         weight: "20%", status: "ACTIVE", canToggle: true },
+    { key: "groq",   name: "Groq AI",      desc: "LLaMA-3.3-70b via Groq API ï¿½ primary AI engine (30%)",        weight: "30%", status: "ACTIVE", canToggle: true },
+    { key: "groq2",  name: "Groq AI #2",   desc: "Mixtral-8x7b via Groq API ï¿½ parallel AI engine (25%)",        weight: "25%", status: "ACTIVE", canToggle: true },
+    { key: "cohere", name: "Cohere AI",     desc: "Command-R-Plus via Cohere API ï¿½ 3rd AI engine (20%)",         weight: "20%", status: "ACTIVE", canToggle: true },
     { key: "ml",     name: "ML Model",      desc: "TF-IDF + LinearSVC trained on phishing corpus (15%)",         weight: "15%", status: "ACTIVE", canToggle: true },
     { key: "rules",  name: "Rule Engine",   desc: "Pattern-based regex rules for known phishing signals (7%)",   weight: "7%",  status: "ACTIVE", canToggle: true },
     { key: "url",    name: "URL Scanner",   desc: "Extracts and evaluates URLs for suspicious domains (3%)",     weight: "3%",  status: "ACTIVE", canToggle: true },
