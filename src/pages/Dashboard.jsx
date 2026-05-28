@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
-import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -23,17 +23,26 @@ const Dashboard = () => {
       const user = auth.currentUser;
       if (!user) return;
 
+      // FIX 1: Removed limit(50) — now fetches ALL scans so stats are accurate
       const q = query(
         collection(db, "scans"),
         where("uid", "==", user.uid),
-        orderBy("timestamp", "desc"),
-        limit(50)
+        orderBy("timestamp", "desc")
       );
       const snapshot = await getDocs(q);
       const scans = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      const threats   = scans.filter((s) => s.label === "phishing" || s.label === "suspicious").length;
-      const cacheHits = scans.filter((s) => s.cache_hit === true).length;
+      // FIX 2: Case-insensitive check + also checks "verdict" field as fallback
+      const threats = scans.filter((s) => {
+        const label = (s.label || s.verdict || "").toLowerCase();
+        return label === "phishing" || label === "suspicious";
+      }).length;
+
+      // FIX 3: Checks all possible cache field names (cache_hit, cached, from_cache)
+      const cacheHits = scans.filter((s) =>
+        s.cache_hit === true || s.cached === true || s.from_cache === true
+      ).length;
+
       const avgScore  = scans.length > 0
         ? Math.round(scans.reduce((sum, s) => sum + (s.score || 0), 0) / scans.length)
         : 0;
@@ -585,14 +594,15 @@ const Dashboard = () => {
                 <div className="empty-state">NO SCANS YET — RUN YOUR FIRST SCAN</div>
               ) : (
                 recentScans.map((scan) => {
-                  const isPhish = scan.label === "phishing" || scan.label === "suspicious";
+                  const isPhish = (scan.label || scan.verdict || "").toLowerCase() === "phishing" ||
+                                  (scan.label || scan.verdict || "").toLowerCase() === "suspicious";
                   return (
                     <div className="scan-row" key={scan.id}>
                       <span className={`verdict-badge ${isPhish ? "phish" : "safe"}`}>
                         {isPhish ? "PHISH" : "SAFE"}
                       </span>
                       <span className="scan-email">{scan.email_preview || "—"}</span>
-                      {scan.cache_hit && <span className="cached-badge">⚡</span>}
+                      {(scan.cache_hit || scan.cached || scan.from_cache) && <span className="cached-badge">⚡</span>}
                       <span className="scan-score" style={{ color: isPhish ? "#ff4d6d" : "#2dc56a" }}>
                         {Math.round(scan.score ?? 0)}%
                       </span>
