@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { requestNotificationPermission, sendPhishingAlert } from "../firebase";
 import { getGmailAccessToken, fetchUnreadEmails, fetchEmailContent, extractEmailBody, extractEmailHeaders } from "../services/gmailService";
 import { db, auth } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -12,6 +13,9 @@ export default function GmailScan() {
   const [progress, setProgress] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
 
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
   const startScan = async () => {
     try {
       setStatus("connecting");
@@ -56,7 +60,11 @@ export default function GmailScan() {
 
         const verdict = scanData.verdict || scanData.label || "unknown";
         const score = scanData.score ?? 0;
-
+        // Trigger notification if phishing detected
+        if (verdict === "phishing") {
+          sendPhishingAlert(subject, Math.round(score));
+        }
+        
         const result = {
           subject,
           from,
