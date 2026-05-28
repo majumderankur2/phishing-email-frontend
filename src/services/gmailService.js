@@ -4,6 +4,20 @@ const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 
 // Get Gmail access token using Google Identity Services
 export async function getGmailAccessToken() {
+  const BACKEND = "https://phishing-email-backend-7a45.onrender.com";
+
+export async function registerTokensWithBackend(uid, refreshToken, fcmToken) {
+  try {
+    await fetch(`${BACKEND}/api/register-token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid, refresh_token: refreshToken, fcm_token: fcmToken })
+    });
+    console.log("Tokens registered with backend ✅");
+  } catch (err) {
+    console.error("Token registration error:", err);
+  }
+}
   return new Promise((resolve, reject) => {
     if (!window.google) {
       reject(new Error('Google Identity Services not loaded'));
