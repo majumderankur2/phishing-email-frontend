@@ -435,17 +435,18 @@ const History = () => {
         </div>
 
         {/* ── NAV ── */}
-        <div className="hist-nav">
+       <div className="hist-nav">
           <a href="/dashboard" className="nav-item">DASHBOARD</a>
           <a href="/scan"      className="nav-item">SCAN</a>
           <span className="nav-item active">HISTORY</span>
           <a href="/reports"   className="nav-item">REPORTS</a>
           <a href="/settings"  className="nav-item">SETTINGS</a>
+          <a href="/gmail-scan" className="nav-item">GMAIL SCAN</a>
         </div>
 
         {/* ── BODY ── */}
         <div className="hist-body">
-          <div className="hist-page-title">// FULL SCAN HISTORY — ALL RECORDS</div>
+          <div className="hist-page-title">// MY SCAN HISTORY</div>
 
           {/* ── SUMMARY CARDS ── */}
           <div className="summary-grid">
