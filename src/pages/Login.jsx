@@ -52,7 +52,7 @@ const Login = () => {
     try {
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard");
+      navigate("/connect-gmail");
     } catch (error) {
       console.error(error);
       alert(error.message);

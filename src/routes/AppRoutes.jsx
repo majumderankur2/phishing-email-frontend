@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-
+import ConnectGmail from "../pages/ConnectGmail";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Scan from "../pages/Scan";
@@ -52,6 +52,9 @@ const AppRoutes = () => (
     <Route path="/login" element={<Login />} />
 
     {/* Protected */}
+    <Route path="/connect-gmail" element={
+      <ProtectedRoute><ConnectGmail /></ProtectedRoute>
+    } />
     <Route path="/dashboard" element={
       <ProtectedRoute><Dashboard /></ProtectedRoute>
     } />
