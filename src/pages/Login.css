@@ -515,3 +515,42 @@
   .start-button  { font-size: 11px; letter-spacing: 1px; gap: 10px; }
   .google-button { font-size: 10px; }
 }
+
+/* ─────────────────────────────────────────────
+   FORGOT PASSWORD
+───────────────────────────────────────────── */
+.forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.forgot-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  padding: 2px 0;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.forgot-btn:hover:not(:disabled) {
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0,245,255,0.6);
+}
+
+.forgot-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.reset-sent {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: #2dc56a;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(45,197,106,0.5);
+}

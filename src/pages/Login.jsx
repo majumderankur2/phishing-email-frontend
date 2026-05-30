@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
@@ -10,7 +11,6 @@ import "./Login.css";
 
 const provider = new GoogleAuthProvider();
 
-// Static binary rain columns — generated once, never causes re-renders
 const RAIN_COLS = Array.from({ length: 22 }, (_, i) => ({
   id: i,
   chars: Array.from({ length: 40 }, () => Math.round(Math.random())).join(""),
@@ -21,7 +21,6 @@ const RAIN_COLS = Array.from({ length: 22 }, (_, i) => ({
   size:     10 + (i % 3),
 }));
 
-// Inline eye icon — no extra library needed
 const EyeIcon = ({ open }) => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -42,10 +41,11 @@ const EyeIcon = ({ open }) => (
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail]             = useState("");
-  const [password, setPassword]       = useState("");
-  const [loading, setLoading]         = useState(false);
+  const [email, setEmail]               = useState("");
+  const [password, setPassword]         = useState("");
+  const [loading, setLoading]           = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [resetSent, setResetSent]       = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -74,10 +74,26 @@ const Login = () => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Please type your email address in the USER_ID field first, then click Forgot Password.");
+      return;
+    }
+    try {
+      setLoading(true);
+      await sendPasswordResetEmail(auth, email);
+      setResetSent(true);
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="login-shell">
 
-      {/* ── BINARY RAIN ── */}
       <div className="binary-rain" aria-hidden="true">
         {RAIN_COLS.map((col) => (
           <span
@@ -96,7 +112,6 @@ const Login = () => {
         ))}
       </div>
 
-      {/* ── HUD CORNER DECORATIONS ── */}
       <div className="hud-note hud-note-left" aria-hidden="true">
         <span>SYSTEM_OK</span>
         <i /><i /><i />
@@ -106,16 +121,13 @@ const Login = () => {
         <i /><i /><i />
       </div>
 
-      {/* ── MAIN LOGIN PANEL ── */}
       <section className="login-panel" aria-label="Login to PhishMeNot AI">
 
-        {/* Glowing corner brackets */}
         <div className="panel-corner panel-corner-tl" />
         <div className="panel-corner panel-corner-tr" />
         <div className="panel-corner panel-corner-bl" />
         <div className="panel-corner panel-corner-br" />
 
-        {/* ── SHIELD ICON ── */}
         <div className="shield-wrap" aria-hidden="true">
           <div className="shield-glow" />
           <div className="shield-icon">🛡</div>
@@ -123,20 +135,16 @@ const Login = () => {
           <div className="shield-ring-b" />
         </div>
 
-        {/* ── BRAND NAME ── */}
         <h1 className="brand-name">
           PhishMe<span className="brand-not">Not</span><span className="brand-ai">.AI</span>
         </h1>
 
-        {/* ── VERSION ── */}
         <div className="version-row">
           <i /><strong>VERSION v1.5X</strong><i />
         </div>
 
-        {/* ── LOGIN FORM ── */}
         <form className="login-form" onSubmit={handleLogin}>
 
-          {/* USER ID */}
           <label htmlFor="login-email" className="field-label">
             <svg className="label-icon" width="12" height="12" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="2">
@@ -157,7 +165,6 @@ const Login = () => {
             />
           </div>
 
-          {/* ACCESS KEY */}
           <label htmlFor="login-password" className="field-label" style={{ marginTop: "16px" }}>
             <svg className="label-icon" width="12" height="12" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="2">
@@ -186,9 +193,23 @@ const Login = () => {
             </button>
           </div>
 
-          {/* START DETECTING BUTTON */}
+          {/* ── FORGOT PASSWORD LINK ── */}
+          <div className="forgot-row">
+            {resetSent ? (
+              <span className="reset-sent">✓ RESET LINK SENT — CHECK YOUR EMAIL</span>
+            ) : (
+              <button
+                type="button"
+                className="forgot-btn"
+                onClick={handleForgotPassword}
+                disabled={loading}
+              >
+                FORGOT PASSWORD?
+              </button>
+            )}
+          </div>
+
           <button className="start-button" type="submit" disabled={loading}>
-            {/* Animated radar icon */}
             <div className="radar-wrap" aria-hidden="true">
               <div className="radar-dot" />
               <div className="radar-ring-1" />
@@ -203,10 +224,8 @@ const Login = () => {
 
         </form>
 
-        {/* ── OR DIVIDER ── */}
         <div className="or-divider"><i /><span>OR</span><i /></div>
 
-        {/* ── GOOGLE BUTTON ── */}
         <button
           className="google-button"
           type="button"
@@ -223,7 +242,6 @@ const Login = () => {
           <span className="start-arrow">›</span>
         </button>
 
-        {/* ── SIGNUP LINK ── */}
         <p className="signup-row">
           NO ACCOUNT?&nbsp;<Link to="/signup">SIGN UP ›</Link>
         </p>
